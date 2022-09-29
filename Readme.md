@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм (простой)»
 
-* Студент: [Наталья Лягина](https://up.htmlacademy.ru/javascript/27/user/2037085).
-* Наставник: `Неизвестно`.
+- Студент: [Наталья Лягина](https://up.htmlacademy.ru/javascript/27/user/2037085).
+- Наставник: [Алексей Хабиров](https://htmlacademy.ru/profile/alex_khab).
 
 ---
 
