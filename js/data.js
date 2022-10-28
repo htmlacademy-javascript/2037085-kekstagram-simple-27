@@ -1,4 +1,6 @@
 import {getRandomIntInclusive} from './util.js';
+import {getRandomArrayElement} from './util.js';
+
 
 const PHOTO_COUNT = 25;
 const MIN_LIKES_COUNT = 15;
@@ -11,9 +13,6 @@ const DESCRIPTIONS = [
   'Кекс едет к ветеринару',
   'Кекс обедает',
 ];
-
-//Функция, возвращающая индекс элемента массива
-const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 
 //Функция builder, создающая объект 1 фотографии
 const createPhoto = (index) => ({
