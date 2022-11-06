@@ -6,7 +6,6 @@ const uploadOverlayPhoto = form.querySelector('.img-upload__overlay');
 const uploadCancelPhoto = document.querySelector('#upload-cancel');
 const uploadLabelPhoto = document.querySelector('.img-upload__label');
 
-
 const onOverlayEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
@@ -35,11 +34,13 @@ function closeForm() {
 
   document.removeEventListener('keydown', onOverlayEscKeydown);
   uploadCancelPhoto.removeEventListener('click', onButtonCloseOverlayClick);
+  uploadCancelPhoto.addEventListener('click', openForm);
 }
 
 const onFormUploadPhotoChange = () => {
   openForm();
 };
+
 
 const setPhotoListener = () => {
   formUploadPhoto.addEventListener('change', onFormUploadPhotoChange);
