@@ -18,8 +18,9 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(rand);
 };
 
-//Функция, возвращающая индекс элемента массива
 const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
 getRandomArrayElement();
 
-export {getRandomIntInclusive};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomIntInclusive, isEscapeKey};
