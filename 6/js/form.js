@@ -1,10 +1,11 @@
 import {isEscapeKey} from './util.js';
 
-const body = document.querySelector('body');
 const form = document.querySelector('#upload-select-image');
-const formUploadFoto = form.querySelector('#upload-foto');
-const uploadCancelFoto = document.querySelector('#upload-cancel');
-const uploadOverlayFoto = form.querySelector('.img-upload__overlay');
+const formUploadPhoto = form.querySelector('#upload-photo');
+const uploadOverlayPhoto = form.querySelector('.img-upload__overlay');
+const uploadCancelPhoto = document.querySelector('#upload-cancel');
+const uploadLabelPhoto = document.querySelector('.img-upload__label');
+
 
 const onOverlayEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -18,25 +19,35 @@ const onButtonCloseOverlayClick = () => {
 };
 
 const openForm = () => {
-  uploadOverlayFoto.classList.remove('hidden');
-  body.classList.add('modal-open');
+  uploadOverlayPhoto.classList.remove('hidden');
+  document.body.classList.add('modal-open');
 
-  uploadCancelFoto.addEventListener('click', onButtonCloseOverlayClick);
+  uploadCancelPhoto.addEventListener('click', onButtonCloseOverlayClick);
   document.addEventListener('keydown', onOverlayEscKeydown);
 };
 
-
+// Только при таком оформлении функции, не подчёркивает closeForm(); на 18 и 13 строчках. Но нарушается критерий Д5
+//const closeForm = () => {
 function closeForm() {
-  uploadOverlayFoto.classList.add('hidden');
-  body.classList.remove('modal-open');
-  formUploadFoto.value = '';
+  uploadOverlayPhoto.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  formUploadPhoto.value = '';
 
   document.removeEventListener('keydown', onOverlayEscKeydown);
-  uploadCancelFoto.removeEventListener('click', onButtonCloseOverlayClick);
+  uploadCancelPhoto.removeEventListener('click', onButtonCloseOverlayClick);
 }
 
-const onFormUploadFotoChange = () => {
+const onFormUploadPhotoChange = () => {
   openForm();
 };
 
-formUploadFoto.addEventListener('change', onFormUploadFotoChange);
+const setPhotoListener = () => {
+  formUploadPhoto.addEventListener('change', onFormUploadPhotoChange);
+};
+
+uploadLabelPhoto.addEventListener('click', () => {
+  openForm();
+});
+
+export {setPhotoListener};
+

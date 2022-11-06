@@ -1,4 +1,5 @@
 import {renderingPictures} from './picture.js';
-import './form.js';
+import {setPhotoListener} from'./form.js';
 
 renderingPictures();
+setPhotoListener();
