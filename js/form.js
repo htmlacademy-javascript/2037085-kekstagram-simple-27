@@ -4,6 +4,7 @@ const form = document.querySelector('#upload-select-image');
 const formUploadPhoto = form.querySelector('#upload-photo');
 const uploadOverlayPhoto = form.querySelector('.img-upload__overlay');
 const uploadCancelPhoto = document.querySelector('#upload-cancel');
+const uploadLabelPhoto = document.querySelector('.img-upload__label');
 
 const onOverlayEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -43,8 +44,11 @@ const onFormUploadPhotoChange = () => {
 
 const setPhotoListener = () => {
   formUploadPhoto.addEventListener('change', onFormUploadPhotoChange);
-  uploadCancelPhoto.addEventListener('click', openForm);
 };
+
+uploadLabelPhoto.addEventListener('click', () => {
+  openForm();
+});
 
 export {setPhotoListener};
 
