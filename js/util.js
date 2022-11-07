@@ -1,11 +1,3 @@
-//Функция для проверки максимальной длины строки. Будет использоваться для проверки длины введённого комментария
-const checkLengthString = (checkedString, maxLength) => {
-  const result = checkedString.length <= maxLength;
-  return result;
-};
-
-checkLengthString(' ', 140);
-
 //Функция, возвращающая случайное целое число из переданного диапазона включительно.
 // Ссылка на источник: https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 const getRandomIntInclusive = (min, max) => {
@@ -18,8 +10,8 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(rand);
 };
 
-//Функция, возвращающая индекс элемента массива
 const getRandomArrayElement = (elements) => elements[getRandomIntInclusive(0, elements.length - 1)];
-getRandomArrayElement();
 
-export {getRandomIntInclusive};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomIntInclusive, getRandomArrayElement, isEscapeKey, };
