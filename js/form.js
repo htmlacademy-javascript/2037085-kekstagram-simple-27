@@ -1,10 +1,9 @@
 import {isEscapeKey} from './util.js';
 
 const form = document.querySelector('#upload-select-image');
-const formUploadPhoto = form.querySelector('#upload-photo');
+const formUploadPhoto = form.querySelector('#upload-file');
 const uploadOverlayPhoto = form.querySelector('.img-upload__overlay');
 const uploadCancelPhoto = document.querySelector('#upload-cancel');
-const uploadLabelPhoto = document.querySelector('.img-upload__label');
 
 const onOverlayEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
@@ -25,8 +24,6 @@ const openForm = () => {
   document.addEventListener('keydown', onOverlayEscKeydown);
 };
 
-// Только при таком оформлении функции, не подчёркивает closeForm(); на 18 и 13 строчках. Но нарушается критерий Д5
-//const closeForm = () => {
 function closeForm() {
   uploadOverlayPhoto.classList.add('hidden');
   document.body.classList.remove('modal-open');
@@ -45,10 +42,6 @@ const onFormUploadPhotoChange = () => {
 const setPhotoListener = () => {
   formUploadPhoto.addEventListener('change', onFormUploadPhotoChange);
 };
-
-uploadLabelPhoto.addEventListener('click', () => {
-  openForm();
-});
 
 export {setPhotoListener};
 
