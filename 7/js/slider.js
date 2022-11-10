@@ -49,10 +49,12 @@ const EFFECTS = [
 ];
 
 
-const formUploadImages = document.querySelector('.img-upload__form'); // Форма загрузки картинок
-const sliderElement = document.querySelector('.effect-level__slider'); // Сам слайдер
-const previewUploadImage = document.querySelector('.img-upload__preview img'); // Предварительный просмотр загружаемой картинки
-const DEFAULT_EFFECT = EFFECTS[0]; // По умолчанию - эффект Оригинал
+const formUploadImage = document.querySelector('.effects__list');
+const sliderElement = document.querySelector('.effect-level__slider');
+const previewUploadImage = document.querySelector('.img-upload__preview img');
+const applyingEffect = document.querySelector('.effect-level__value');
+
+const DEFAULT_EFFECT = EFFECTS[0];
 
 let currentEffect = DEFAULT_EFFECT;
 
@@ -69,15 +71,17 @@ const updateSlider = () => {
     start: currentEffect.max,
   });
 
-  if(isDefault()) {
+  if (isDefault()) {
     sliderElement.classList.add('hidden');
   }
 };
 
 const onFormChange = (evt) => {
-  if(!evt.target.classList.contains('effects__radio')) {
+
+  if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
+
   currentEffect = EFFECTS.find((effect) => effect.name === evt.target.value);
   updateSlider();
 };
@@ -85,12 +89,16 @@ const onFormChange = (evt) => {
 const onSliderUpdate = () => {
   previewUploadImage.style.filter = 'none';
   previewUploadImage.className = '';
-  if(isDefault()){
+  applyingEffect.value = '';
+
+  if (isDefault()){
     return;
   }
+
   const sliderValue = sliderElement.noUiSlider.get();
   previewUploadImage.style.filter = `${currentEffect.style}(${sliderValue}${currentEffect.unit})`;
   previewUploadImage.classList.add(`effects__preview--${currentEffect.name}`);
+  applyingEffect.value = sliderValue;
 };
 
 const resetEffects = () => {
@@ -105,12 +113,12 @@ noUiSlider.create(sliderElement, {
   },
   step: DEFAULT_EFFECT.step,
   start: DEFAULT_EFFECT.max,
-  connect: 'lower',
+  сonnect: 'lower',
 });
 
-updateSlider();
+const initSlider = () => {
+  sliderElement.noUiSlider.on('update', onSliderUpdate);
+  formUploadImage.addEventListener('change', onFormChange);
+};
 
-formUploadImages.addEventListener('change', onFormChange);
-sliderElement.noUiSlider.on('update', onSliderUpdate);
-
-export {resetEffects};
+export {resetEffects, initSlider};
