@@ -1,48 +1,48 @@
 const MAX_SCALE_RANGE = 100;
 const MIN_SCALE_RANGE = 25;
+const DEFAULT_SCALE = 100;
 
 
-const reduceScale = document.querySelector('.scale__control--smaller'); // Уменьшить масштаб
-const enhanceScale = document.querySelector('.scale__control--bigger'); // Увеличить масштаб
-const valueElement = document.querySelector('.scale__control--value'); // Поле со значением
-const originalSizeImage = document.querySelector('.img-upload__preview'); //Картинка исходного размера
-let sizeValue = 100;
+const reduceScale = document.querySelector('.scale__control--smaller');
+const enhanceScale = document.querySelector('.scale__control--bigger');
+const valueElement = document.querySelector('.scale__control--value');
+const originalSizeImage = document.querySelector('.img-upload__preview');
 
-// Функция масштабирования
-const editSize = () => {
+let sizeValue = DEFAULT_SCALE;
 
-  reduceScale.addEventListener('click', () => {
-    if(sizeValue > MIN_SCALE_RANGE) {
-      sizeValue -= MIN_SCALE_RANGE;
-      valueElement.value = `${sizeValue}%`;
-      originalSizeImage.style.transform = `scale(${sizeValue / 100})`;
-    }
-  });
+const onReduceButtonClick = () => {
 
-  enhanceScale .addEventListener('click', () => {
-    if(sizeValue < MAX_SCALE_RANGE) {
-      sizeValue += MIN_SCALE_RANGE;
-      valueElement.value = `${sizeValue}%`;
-      originalSizeImage.style.transform = `scale(${sizeValue / 100})`;
-    }
-  });
+  if (sizeValue > MIN_SCALE_RANGE) {
+    sizeValue -= MIN_SCALE_RANGE;
+    valueElement.value = `${sizeValue}%`;
+    originalSizeImage.style.transform = `scale(${sizeValue / DEFAULT_SCALE})`;
+  }
 };
 
-//Функция, устанавливающая значение масштаба
+const onIncreaseButtonClick = () => {
+
+  if (sizeValue < MAX_SCALE_RANGE) {
+    sizeValue += MIN_SCALE_RANGE;
+    valueElement.value = `${sizeValue}%`;
+    originalSizeImage.style.transform = `scale(${sizeValue / DEFAULT_SCALE})`;
+  }
+};
+
 const getScaleValue = (value) => {
   valueElement.value = `${value}%`;
-  originalSizeImage.style.transform = `scale(${value / 100})`;
+  originalSizeImage.style.transform = `scale(${value / DEFAULT_SCALE})`;
 };
 
-getScaleValue(sizeValue);
-
-//Функция, сбрасывающая значение масштаба
 const resetScale = () => {
   sizeValue = MAX_SCALE_RANGE;
   getScaleValue(MAX_SCALE_RANGE);
-  originalSizeImage.style.transform = `scale(${sizeValue / 100})`;
+  originalSizeImage.style.transform = 'scale(1)';
 };
 
-editSize();
+const setSizeListeners = () => {
+  reduceScale.addEventListener('click', onReduceButtonClick);
+  enhanceScale .addEventListener('click', onIncreaseButtonClick);
+};
 
-export {resetScale};
+export {resetScale, setSizeListeners};
+
