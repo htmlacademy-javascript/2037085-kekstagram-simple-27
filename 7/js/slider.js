@@ -1,4 +1,3 @@
-// Массив с эффектами для картинок
 const EFFECTS = [
   {
     name: 'none',
@@ -77,7 +76,6 @@ const updateSlider = () => {
 };
 
 const onFormChange = (evt) => {
-
   if (!evt.target.classList.contains('effects__radio')) {
     return;
   }
@@ -87,13 +85,17 @@ const onFormChange = (evt) => {
 };
 
 const onSliderUpdate = () => {
+  sliderElement.classList.add('hidden');
   previewUploadImage.style.filter = 'none';
+  previewUploadImage.removeAttribute('class');
   previewUploadImage.className = '';
   applyingEffect.value = '';
 
   if (isDefault()){
     return;
   }
+
+  sliderElement.classList.remove('hidden');
 
   const sliderValue = sliderElement.noUiSlider.get();
   previewUploadImage.style.filter = `${currentEffect.style}(${sliderValue}${currentEffect.unit})`;
@@ -106,17 +108,20 @@ const resetEffects = () => {
   updateSlider();
 };
 
-noUiSlider.create(sliderElement, {
-  range: {
-    min: DEFAULT_EFFECT.min,
-    max: DEFAULT_EFFECT.max,
-  },
-  step: DEFAULT_EFFECT.step,
-  start: DEFAULT_EFFECT.max,
-  сonnect: 'lower',
-});
-
 const initSlider = () => {
+  noUiSlider.create(sliderElement, {
+    range: {
+      min: DEFAULT_EFFECT.min,
+      max: DEFAULT_EFFECT.max,
+    },
+    step: DEFAULT_EFFECT.step,
+    start: DEFAULT_EFFECT.max,
+    сonnect: 'lower',
+  });
+
+  updateSlider();
+
+  sliderElement.classList.add('hidden');
   sliderElement.noUiSlider.on('update', onSliderUpdate);
   formUploadImage.addEventListener('change', onFormChange);
 };

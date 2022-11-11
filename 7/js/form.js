@@ -1,4 +1,6 @@
 import {isEscapeKey} from './util.js';
+import {resetEffects} from './slider.js';
+import {resetScale} from './scale.js';
 
 const form = document.querySelector('#upload-select-image');
 const formUploadPhoto = form.querySelector('#upload-file');
@@ -19,6 +21,11 @@ const onButtonCloseOverlayClick = () => {
 const openForm = () => {
   uploadOverlayPhoto.classList.remove('hidden');
   document.body.classList.add('modal-open');
+  uploadOverlayPhoto.classList.add('hidden');
+  document.body.classList.remove('modal-open');
+  formUploadPhoto.value = '';
+  resetEffects();
+  resetScale();
 
   uploadCancelPhoto.addEventListener('click', onButtonCloseOverlayClick);
   document.addEventListener('keydown', onOverlayEscKeydown);
