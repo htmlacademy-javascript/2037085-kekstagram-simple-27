@@ -35,7 +35,6 @@ const resetScale = () => {
   sizeValue = MAX_SCALE_RANGE;
   getScaleValue(MAX_SCALE_RANGE);
   originalSizeImage.style.transform = 'scale(1)';
-  resetScale();
 };
 
 const setSizeListeners = () => {
