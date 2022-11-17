@@ -60,37 +60,54 @@ const onFormUploadPhotoChange = () => {
   openForm();
 };
 
-
 const setPhotoListener = () => {
   formUploadPhoto.addEventListener('change', onFormUploadPhotoChange);
 };
 
 const renderSuccessMessage = () => {
   const successElement = successTemplate.cloneNode(true);
+  const inner = document.querySelector('.success__inner');
   document.body.append(successElement);
 
-  successElement.addEventListener('click', () => successElement.remove());
-  document.addEventListener('keydown', (evt) => {
+  successElement.addEventListener('click', (evt) => {
+    if (evt.target === inner) {
+      return;
+    }
+    successElement.remove();
+  });
 
-    if (evt.key === 'Escape') {
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey (evt)) {
+
       successElement.remove();
     }
-  }
-  );
+  });
+
+  //const onResetKeydown = ___;
+  document.removeEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      evt.preventDefault();
+    }
+  });
 };
 
 const renderErrorMessage = () => {
   const failElement = errorTemplate.cloneNode(true);
+  const error = document.querySelector('.error__inner');
   document.body.append(failElement);
 
-  failElement.addEventListener('click', () => failElement.remove());
-  document.addEventListener('keydown', (evt) => {
+  failElement.addEventListener('click', (evt) => {
+    if (evt.target === error){
+      return;
+    }
+    failElement.remove();
+  });
 
-    if (evt.key === 'Escape') {
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey (evt)) {
       failElement.remove();
     }
-  }
-  );
+  });
 };
 
 const setUserFormSubmit = () => {
@@ -104,6 +121,7 @@ const setUserFormSubmit = () => {
       sendData(
         () => {
           unblockSubmitButton();
+          closeForm();
           renderSuccessMessage();
         },
         () => {
