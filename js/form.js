@@ -69,26 +69,25 @@ const renderSuccessMessage = () => {
   const inner = document.querySelector('.success__inner');
   document.body.append(successElement);
 
+  const closeMassage = () => {
+    successElement.remove();
+    document.removeEventListener('keydown', onResetKeydown);
+  };
+
   successElement.addEventListener('click', (evt) => {
     if (evt.target === inner) {
       return;
     }
-    successElement.remove();
+    closeMassage();
   });
 
-  document.addEventListener('keydown', (evt) => {
+  function onResetKeydown (evt) {
     if (isEscapeKey (evt)) {
-
-      successElement.remove();
+      closeMassage();
     }
-  });
+  }
 
-  //const onResetKeydown = ___;
-  document.removeEventListener('keydown', (evt) => {
-    if (isEscapeKey(evt)) {
-      evt.preventDefault();
-    }
-  });
+  document.addEventListener('keydown', onResetKeydown);
 };
 
 const renderErrorMessage = () => {
@@ -96,18 +95,25 @@ const renderErrorMessage = () => {
   const error = document.querySelector('.error__inner');
   document.body.append(failElement);
 
+  const closeErrorMassage = () => {
+    failElement.remove();
+    document.removeEventListener('keydown', onResetError);
+  };
+
   failElement.addEventListener('click', (evt) => {
     if (evt.target === error){
       return;
     }
-    failElement.remove();
+    closeErrorMassage ();
   });
 
-  document.addEventListener('keydown', (evt) => {
+  function onResetError (evt){
     if (isEscapeKey (evt)) {
-      failElement.remove();
+      closeErrorMassage();
     }
-  });
+  }
+
+  document.addEventListener('keydown', onResetError);
 };
 
 const setUserFormSubmit = () => {
