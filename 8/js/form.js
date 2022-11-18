@@ -51,6 +51,7 @@ function closeForm() {
   formUploadPhoto.value = '';
   resetEffects();
   resetScale();
+  form.reset();
 
   document.removeEventListener('keydown', onOverlayEscKeydown);
   uploadCancelPhoto.removeEventListener('click', onButtonCloseOverlayClick);
