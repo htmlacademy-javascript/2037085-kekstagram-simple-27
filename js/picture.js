@@ -1,11 +1,7 @@
-import {createPhotos} from './data.js';
-
 const picturesSection = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const pictures = createPhotos();
-
-const renderingPictures = () => {
+const renderingPictures = (pictures) => {
 
   const pictureFragment = document.createDocumentFragment();
 
