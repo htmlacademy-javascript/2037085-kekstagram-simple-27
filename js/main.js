@@ -9,3 +9,4 @@ initSlider();
 setSizeListeners();
 getData(renderingPictures);
 setUserFormSubmit();
+//Добавила этот комментарий, чтобы было хоть какое-то изменение и архив можно было обновить, дабы потом отправить ещё раз на проверку
